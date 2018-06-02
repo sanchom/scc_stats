@@ -10,7 +10,7 @@
   (string->url (string-append "https://scc-csc.lexum.com/" judgement-slug "?iframe=true")))
 
 (define (build-docket-info-url docket-no)
-  (string->url (string-append "http://www.scc-csc.ca/case-dossier/info/parties-eng.aspx?cas=" docket-no)))
+  (string->url (string-append "https://www.scc-csc.ca/case-dossier/info/parties-eng.aspx?cas=" docket-no)))
 
 (define (get-docket-numbers-from-judgement judgement-slug)
   (sleep (/ (random 20 30) 10))
@@ -63,4 +63,4 @@
 (define (write-info-for-year year)
   (for-each (lambda (docket-no) (write-docket-info year (get-docket-info docket-no))) (get-docket-list year)))
 
-(for-each (lambda (year) (write-info-for-year year)) '("2010" "2011" "2012" "2013" "2014" "2015" "2016"))
+(for-each (lambda (year) (write-info-for-year year)) '("2017"))

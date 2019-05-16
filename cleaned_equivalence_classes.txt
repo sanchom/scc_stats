@@ -24,6 +24,7 @@ AD IDEM/Canadian Media Lawyers Association
 Ad Idem/Canadian Media Lawyers Association
 Ad IDEM/Canadian Media Lawyers' Association
 Ad IDEM/Canadian Media Lawyers Association
+Ad IDEM/Canadian Media lawyers Association
 
 Advocacy Centre for the Elderly
 
@@ -109,6 +110,9 @@ Attorney General of Québec
 Attorney General of the North West Territories
 Attorney General of the Northwest Territories
 Attorney General of Northwest Territories
+
+Attorney General of Ontario
+Attorney General for Ontario
 
 B.C. Seafood Alliance
 
@@ -478,8 +482,6 @@ Five Hills Regional Health Authority
 
 France Animation S.A.
 
-Freedom of Information and Protection of Privacy Commissioner [Review Officer] for Nova Scotia
-
 Friends of the Earth Canada
 
 Fédération des communautés francophones et acadienne du Canada
@@ -694,6 +696,7 @@ Northwest Territories Information and Privacy Commissioner
 Northwest Territories and Nunavut Chamber of Mines
 
 Nova Scotia Information and Privacy Commissioner [Review Officer]
+Freedom of Information and Protection of Privacy Commissioner [Review Officer] for Nova Scotia
 
 Nunavut Information and Privacy Commissioner
 
@@ -883,16 +886,14 @@ Sunrise Regional Health Authority
 Sylvie Fréchette
 
 TELUS Communications Inc.
+Telus Communications Inc.
 
 Te'Mexw Nations
 Te'mexw Nations
-
 Te'Mexw Treaty Association
 Te'mexw Treaty Association
 
 TekSavvy Solutions Inc.
-
-Telus Communications Inc.
 
 Teslin Tlingit Council
 

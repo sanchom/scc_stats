@@ -1,9 +1,9 @@
 from cached_scc import CachedSCC
 
+import argparse
 import datetime
 import logging
-import time
-import random
+import re
 import sys
 
 logging.basicConfig(level=logging.INFO)
@@ -137,21 +137,31 @@ def print_tsv_interveners(decisions):
             for i in v['interveners']:
                 print('{}\t{}\t{}'.format(key, v['title'], i))
 
+def remove_leftovers(intervener):
+    prev = None
+    while (prev != intervener):
+        prev = intervener
+        intervener = intervener.strip(' ,/')
+        for token in ['and', 'et', 'the' , 'le', 'la', 'les']:
+            # If any of these were found alone at the beginning or end
+            # of the remaining intervener text, strip them away.
+            pattern = r'^{}([^\w]|$)'.format(token)
+            if re.search(pattern, intervener):
+                intervener = re.sub(pattern, '', intervener)
+                intervener = intervener.strip(' ,/')
+            pattern = r'([^\w]|^){}$'.format(token)
+            if re.search(pattern, intervener):
+                intervener = re.sub(pattern, '', intervener)
+                intervener = intervener.strip(' ,/')
+    return intervener
+
 def clean_up_intervener(intervener, intervener_to_class, equivalence_classes):
     results = []
     for (query, class_id) in intervener_to_class:
         if query in intervener:
             results.append(equivalence_classes[class_id][0])
             intervener = intervener.replace(query, '')
-    intervener = intervener.strip(' ,/')
-    if intervener.startswith('and'):
-        intervener = intervener.replace('and', '')
-    intervener = intervener.strip(' ,/')
-    if intervener.startswith('et'):
-        intervener = intervener.replace('et', '')
-    if intervener.startswith('the'):
-        intervener = intervener.replace('the', '')
-    intervener = intervener.strip(' ,/')
+    intervener = remove_leftovers(intervener)
     if len(intervener) > 0:
         results.append(intervener)
     return results
@@ -170,9 +180,12 @@ def clean_up_interveners(original_interveners, equivalence_classes):
 
     return cleaned_up
 
-assert len(sys.argv) == 2, 'Failed to provide path to equivalence classes.'
-equivalence_path = sys.argv[1]
-f = open(equivalence_path, 'r')
+parser = argparse.ArgumentParser()
+parser.add_argument('--equivalences', required=True)
+parser.add_argument('--format', required=True)
+args = parser.parse_args()
+
+f = open(args.equivalences, 'r')
 data = f.read()
 f.close()
 equivalence_classes = []
@@ -206,4 +219,11 @@ for c in case_list:
                                 'as_of_right': d['as_of_right'],
                                 'interveners': sorted(list(set(interveners)))}
 
-print_tsv_interveners(decisions)
+if args.format == 'individual':
+    print_tsv_interveners(decisions)
+elif args.format == 'aggregate':
+    print_tsv(decisions)
+elif args.format == 'pollen':
+    print_pollen(decisions)
+else:
+    raise ValueError('{} not recognized as an output format.'.format(args.format))
